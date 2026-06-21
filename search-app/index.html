@@ -6,16 +6,17 @@
     <title>NiceYoni — תוכנה מתקדמת לחיפוש במסמכים</title>
     <style>
         :root {
-            --paper: #f1ebdc;
+            --paper: #fff4e3;
             --card: #fffaf0;
-            --ink: #2b2420;
-            --ink-soft: #5c5246;
-            --rule: #c9bca0;
-            --tab-brown: #8a5a35;
-            --tab-brown-dark: #6e4527;
-            --accent: #b5482e;
-            --accent-dark: #93381f;
-            --green-stamp: #3c6e4f;
+            --ink: #271c14;
+            --ink-soft: #5c4632;
+            --rule: #f0c178;
+            --tab-brown: #e0712a;
+            --tab-brown-dark: #c2511a;
+            --accent: #e0392f;
+            --accent-dark: #b8231b;
+            --green-stamp: #1f9d6e;
+            --teal: #0f9ba6;
         }
 
         * { box-sizing: border-box; }
@@ -25,8 +26,8 @@
             padding: 0;
             background-color: var(--paper);
             background-image:
-                radial-gradient(circle at 15% 20%, rgba(0,0,0,0.025) 0, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(0,0,0,0.025) 0, transparent 40%);
+                radial-gradient(circle at 12% 15%, rgba(224, 113, 42, 0.08) 0, transparent 42%),
+                radial-gradient(circle at 88% 85%, rgba(15, 155, 166, 0.07) 0, transparent 42%);
             color: var(--ink);
             font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
             line-height: 1.65;
@@ -86,7 +87,7 @@
             border-radius: 4px;
             transform: rotate(-2deg);
             margin-bottom: 26px;
-            background: rgba(181, 72, 46, 0.04);
+            background: rgba(224, 57, 47, 0.06);
         }
 
         .description {
@@ -140,13 +141,13 @@
             font-weight: 600;
             font-family: "Iowan Old Style", Georgia, serif;
             transition: all 0.18s ease;
-            box-shadow: 0 6px 16px rgba(181, 72, 46, 0.32);
+            box-shadow: 0 6px 16px rgba(224, 57, 47, 0.35);
         }
 
         .download-btn:hover {
             background-color: var(--accent-dark);
             transform: translateY(-1px);
-            box-shadow: 0 9px 20px rgba(181, 72, 46, 0.4);
+            box-shadow: 0 9px 20px rgba(224, 57, 47, 0.45);
         }
 
         .download-icon {
@@ -206,10 +207,11 @@
             font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--ink-soft);
+            color: var(--teal);
+            font-weight: 700;
             padding: 10px 16px;
             border-bottom: 1px solid var(--rule);
-            background: #faf6ec;
+            background: #fef0e0;
         }
 
         .screenshot-card img {
@@ -220,7 +222,7 @@
 
         /* ===== Smart indexing feature block ===== */
         .index-feature {
-            background: linear-gradient(180deg, #faf6ec 0%, #f5efe0 100%);
+            background: linear-gradient(135deg, #fff0d9 0%, #ffe3d1 100%);
             border: 1px solid var(--rule);
             border-radius: 8px;
             padding: 28px 30px;
@@ -242,12 +244,16 @@
             text-align: center;
         }
 
+        .index-chip:nth-child(1) .num { color: var(--accent-dark); }
+        .index-chip:nth-child(2) .num { color: var(--teal); }
+        .index-chip:nth-child(3) .num { color: var(--green-stamp); }
+
         .index-chip .num {
             font-family: "Courier New", monospace;
             font-size: 11px;
-            color: var(--green-stamp);
             letter-spacing: 1px;
             margin-bottom: 6px;
+            font-weight: 700;
         }
 
         .index-chip .label {
@@ -324,48 +330,46 @@
 
             <!-- אינדקס חכם -->
             <div class="section-label">
-                <span class="tag">תכונה חדשה</span>
                 <span class="line"></span>
             </div>
             <h2 class="section-title">יצירת אינדקסים חכמה</h2>
             <div class="index-feature">
                 <p>
-                    התוכנה בונה לכל תיקייה אינדקס חיפוש מלא מבעוד מועד, כך שתוצאות מופיעות מיידית גם באלפי קבצים, ומתעדכן אוטומטית כשמשהו משתנה.
+                    המשתמש מכין אינדקסים מבעוד מועד לתיקיות שמעניינות אותו, וכך חיפוש מסמכים לוקח שניות בודדות — גם כשמדובר באלפי קבצים.
                 </p>
                 <div class="index-feature-grid">
                     <div class="index-chip">
                         <div class="num">01</div>
-                        <div class="label">סריקה אוטומטית של תיקיות</div>
+                        <div class="label">בניית אינדקס לתיקייה לבחירתך</div>
                     </div>
                     <div class="index-chip">
                         <div class="num">02</div>
-                        <div class="label">עדכון אינדקס בזמן אמת</div>
+                        <div class="label">חיפוש מיידי באינדקסים שנבנו</div>
                     </div>
                     <div class="index-chip">
                         <div class="num">03</div>
-                        <div class="label">תוצאות מיידיות ללא השתהות</div>
+                        <div class="label">עדכון האינדקס בלחיצת כפתור</div>
                     </div>
                 </div>
             </div>
 
             <!-- צילומי מסך -->
             <div class="section-label">
-                <span class="tag">מבט פנימי</span>
                 <span class="line"></span>
             </div>
             <h2 class="section-title">צילומי מסך מתוך התוכנה</h2>
             <div class="screenshot-stack">
                 <div class="screenshot-card">
                     <div class="frame-label">מסך חיפוש ראשי</div>
-                    <img src="1.png" alt="מסך חיפוש ראשי">
+                    <img src="1.PNG" alt="מסך חיפוש ראשי">
                 </div>
                 <div class="screenshot-card">
                     <div class="frame-label">תוצאות חיפוש במסמכים</div>
-                    <img src="2.png" alt="תוצאות חיפוש במסמכים">
+                    <img src="2.PNG" alt="תוצאות חיפוש במסמכים">
                 </div>
                 <div class="screenshot-card">
                     <div class="frame-label">הגדרות תוכנה</div>
-                    <img src="3.png" alt="הגדרות תוכנה">
+                    <img src="3.PNG" alt="הגדרות תוכנה">
                 </div>
             </div>
 
