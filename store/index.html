@@ -6,60 +6,108 @@
     <title>עולם הנעל - חנות נעליים איכותית</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e74c3c; /* צבע כפתור חיוג בולט */
-            --bg-color: #f0f3f6; /* רקע אתר רך ונעים */
+            --leather: #7b2ff7;
+            --leather-dark: #5a1fc4;
+            --sole: #ff4d6d;
+            --sole-dark: #e8324f;
+            --pop: #ffd60a;
+            --pop-dark: #f0b800;
+            --bg: #f3f0ff;
             --card-bg: #ffffff;
-            --text-main: #2c3e50;
-            --text-muted: #7f8c8d;
-            --header-bg: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* רקע מדורג יפה לכותרת */
+            --ink: #1f1430;
+            --ink-soft: #6a5d8a;
+            --rule: #e3d9ff;
+            --stitch: #ffd60a;
         }
 
+        * { box-sizing: border-box; }
+
         body {
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 10% 10%, rgba(255,77,109,0.10) 0, transparent 40%),
+                               radial-gradient(circle at 90% 90%, rgba(123,47,247,0.10) 0, transparent 40%);
+            color: var(--ink);
             line-height: 1.6;
+            transition: background-color 0.5s ease, background-image 0.5s ease;
+        }
+
+        body.bg-mens {
+            background-color: #bcd6ff;
+            background-image: radial-gradient(circle at 10% 10%, rgba(37,99,235,0.55) 0, transparent 55%),
+                               radial-gradient(circle at 90% 90%, rgba(29,78,216,0.45) 0, transparent 55%);
+        }
+
+        body.bg-womens {
+            background-color: #ffc2cf;
+            background-image: radial-gradient(circle at 10% 10%, rgba(225,29,72,0.55) 0, transparent 55%),
+                               radial-gradient(circle at 90% 90%, rgba(190,18,60,0.45) 0, transparent 55%);
+        }
+
+        body.bg-kids {
+            background-color: #d6c2ff;
+            background-image: radial-gradient(circle at 10% 10%, rgba(147,51,234,0.5) 0, transparent 55%),
+                               radial-gradient(circle at 90% 90%, rgba(20,184,166,0.45) 0, transparent 55%);
         }
 
         header {
-            background: var(--header-bg);
-            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, var(--leather) 0%, var(--sole) 100%);
+            padding: 46px 20px 34px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            color: #ffffff;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 6px;
+            background: repeating-linear-gradient(90deg, var(--stitch) 0 10px, transparent 10px 20px);
+            opacity: 0.7;
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         h1 {
             margin: 0;
-            color: #ffffff;
-            font-size: 38px;
+            color: #fff;
+            font-size: 42px;
             font-weight: 800;
             letter-spacing: -1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.18);
         }
 
         .subtitle {
-            color: #ecf0f1;
+            color: rgba(255,255,255,0.9);
             font-size: 16px;
-            margin: 8px 0 20px;
+            margin: 10px 0 24px;
         }
 
         /* תיבת מידע על העסק */
         .business-info {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             display: inline-block;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(5px);
+            padding: 16px 26px;
+            border-radius: 12px;
+            font-size: 14.5px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(6px);
+            text-align: right;
         }
         .info-line {
-            margin: 4px 0;
+            margin: 5px 0;
         }
 
         /* ניווט קטגוריות מעוצב */
@@ -67,15 +115,16 @@
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-top: 10px;
+            margin-top: 6px;
+            flex-wrap: wrap;
         }
 
         .tab-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 12px 30px;
+            background-color: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 12px 32px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             border-radius: 30px;
             transition: all 0.25s ease;
@@ -83,21 +132,21 @@
         }
 
         .tab-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.26);
             transform: translateY(-1px);
         }
 
         .tab-btn.active {
             background-color: #ffffff;
-            color: var(--primary-color);
+            color: var(--leather-dark);
             border-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.22);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px 80px;
+            padding: 48px 20px 70px;
         }
 
         /* גריד גלריה */
@@ -114,12 +163,12 @@
         /* כרטיס מוצר */
         .product-card {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            border: 1px solid #e1e8ed;
+            box-shadow: 0 10px 28px rgba(123, 47, 247, 0.10);
+            border: 1px solid var(--rule);
             text-align: center;
-            padding: 20px;
+            padding: 22px;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -128,17 +177,18 @@
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 16px 34px rgba(123, 47, 247, 0.18);
+            border-color: var(--sole);
         }
 
         .image-container {
             width: 100%;
             height: 240px;
-            background-color: #f8f9fa;
-            border-radius: 12px;
+            background-color: #f0ecff;
+            border-radius: 14px;
             overflow: hidden;
-            margin-bottom: 15px;
-            border: 1px solid #edf2f7;
+            margin-bottom: 16px;
+            border: 1px solid var(--rule);
         }
 
         .product-card img {
@@ -153,24 +203,24 @@
         }
 
         .product-info {
-            padding: 5px 0;
+            padding: 6px 0;
         }
 
         .product-title {
             font-size: 19px;
-            color: var(--primary-color);
-            margin: 0 0 8px;
+            color: var(--leather-dark);
+            margin: 0 0 10px;
             font-weight: 700;
         }
 
         .product-price {
-            color: #ffffff;
+            color: var(--leather-dark);
             font-size: 16px;
-            font-weight: 600;
-            margin: 0 0 16px;
-            background: #34495e;
+            font-weight: 800;
+            margin: 0 0 18px;
+            background: var(--pop);
             display: inline-block;
-            padding: 5px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
         }
 
@@ -180,36 +230,52 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background-color: var(--accent-color);
+            background-color: var(--sole);
             color: white;
             text-decoration: none;
-            padding: 12px;
+            padding: 13px;
             border-radius: 12px;
             font-weight: bold;
             font-size: 15px;
             transition: background-color 0.2s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+            box-shadow: 0 5px 14px rgba(255, 77, 109, 0.38);
         }
 
         .order-btn:hover {
-            background-color: #c0392b;
+            background-color: var(--sole-dark);
             transform: translateY(-2px);
+        }
+
+        /* פוטר */
+        footer {
+            text-align: center;
+            padding: 26px 20px 34px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--ink-soft);
+            text-transform: uppercase;
+        }
+
+        footer strong {
+            color: var(--leather-dark);
+            letter-spacing: 1.5px;
         }
     </style>
 </head>
 <body>
 
 <header>
+    <div class="eyebrow">בני ברק · נעליים לכל המשפחה</div>
     <h1>עולם הנעל</h1>
     <div class="subtitle">מבחר נעליים איכותיות לכל המשפחה</div>
-    
+
     <!-- פרטי העסק כפי שביקשת -->
     <div class="business-info">
         <div class="info-line">📍 <strong>כתובתנו:</strong> רחוב שפת אמת 10, בני ברק</div>
-        <div class="info-line">⏰ <strong>שעות פתיחה לבירורים:</strong> 18:00 עד 22:00 בלילה</div>
+        <div class="info-line">⏰ <strong>שעות פתיחה:</strong> 18:00 עד 22:00 בלילה</div>
         <div class="info-line">📞 <strong>טלפון לבירורים והזמנות:</strong> 052-7174064</div>
     </div>
-    
+
     <div class="categories-nav">
         <button class="tab-btn active" onclick="showCategory('mens')">גברים</button>
         <button class="tab-btn" onclick="showCategory('womens')">נשים</button>
@@ -290,6 +356,10 @@
 
 </div>
 
+<footer>
+    האתר נבנה על ידי <strong>niceyoni.com</strong>
+</footer>
+
 <script>
     function showCategory(categoryId) {
         document.querySelectorAll('.gallery-section').forEach(section => {
@@ -298,10 +368,15 @@
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        
+
         document.getElementById(categoryId).classList.add('active');
         event.currentTarget.classList.add('active');
+
+        document.body.classList.remove('bg-mens', 'bg-womens', 'bg-kids');
+        document.body.classList.add('bg-' + categoryId);
     }
+
+    document.body.classList.add('bg-mens');
 </script>
 
 </body>
