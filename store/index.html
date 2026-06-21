@@ -6,12 +6,13 @@
     <title>עולם הנעל - חנות נעליים איכותית</title>
     <style>
         :root {
-            --primary-color: #1a1a1a;
-            --accent-color: #25d366; /* צבע ווטסאפ */
-            --bg-color: #f8f9fa;
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c; /* צבע כפתור חיוג בולט */
+            --bg-color: #f0f3f6; /* רקע אתר רך ונעים */
             --card-bg: #ffffff;
-            --text-main: #2d3436;
-            --text-muted: #636e72;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --header-bg: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* רקע מדורג יפה לכותרת */
         }
 
         body {
@@ -24,25 +25,41 @@
         }
 
         header {
-            background: var(--card-bg);
-            padding: 40px 20px 20px;
+            background: var(--header-bg);
+            padding: 40px 20px 30px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border-bottom: 1px solid #edf2f7;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            color: #ffffff;
         }
 
         h1 {
             margin: 0;
-            color: var(--primary-color);
-            font-size: 36px;
+            color: #ffffff;
+            font-size: 38px;
             font-weight: 800;
             letter-spacing: -1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .subtitle {
-            color: var(--text-muted);
+            color: #ecf0f1;
             font-size: 16px;
-            margin: 8px 0 24px;
+            margin: 8px 0 20px;
+        }
+
+        /* תיבת מידע על העסק */
+        .business-info {
+            background: rgba(255, 255, 255, 0.15);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+        }
+        .info-line {
+            margin: 4px 0;
         }
 
         /* ניווט קטגוריות מעוצב */
@@ -54,28 +71,27 @@
         }
 
         .tab-btn {
-            background-color: var(--card-bg);
-            border: 1px solid #e2e8f0;
-            padding: 12px 28px;
-            font-size: 15px;
-            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             border-radius: 30px;
             transition: all 0.25s ease;
-            color: var(--text-main);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            color: #ffffff;
         }
 
         .tab-btn:hover {
-            border-color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
 
         .tab-btn.active {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .container {
@@ -95,13 +111,13 @@
             gap: 30px;
         }
 
-        /* כרטיס מוצר יוקרתי */
+        /* כרטיס מוצר */
         .product-card {
             background: var(--card-bg);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border: 1px solid #edf2f7;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid #e1e8ed;
             text-align: center;
             padding: 20px;
             transition: all 0.3s ease;
@@ -112,16 +128,17 @@
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
         }
 
         .image-container {
             width: 100%;
             height: 240px;
-            background-color: #f1f2f6;
+            background-color: #f8f9fa;
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 15px;
+            border: 1px solid #edf2f7;
         }
 
         .product-card img {
@@ -147,17 +164,17 @@
         }
 
         .product-price {
-            color: var(--primary-color);
-            font-size: 17px;
+            color: #ffffff;
+            font-size: 16px;
             font-weight: 600;
             margin: 0 0 16px;
-            background: #f1f2f6;
+            background: #34495e;
             display: inline-block;
-            padding: 4px 12px;
+            padding: 5px 16px;
             border-radius: 20px;
         }
 
-        /* כפתור ווטסאפ מהיר */
+        /* כפתור חיוג טלפוני */
         .order-btn {
             display: flex;
             align-items: center;
@@ -168,14 +185,14 @@
             text-decoration: none;
             padding: 12px;
             border-radius: 12px;
-            font-weight: 600;
+            font-weight: bold;
             font-size: 15px;
             transition: background-color 0.2s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
         }
 
         .order-btn:hover {
-            background-color: #20ba56;
+            background-color: #c0392b;
             transform: translateY(-2px);
         }
     </style>
@@ -185,6 +202,13 @@
 <header>
     <h1>עולם הנעל</h1>
     <div class="subtitle">מבחר נעליים איכותיות לכל המשפחה</div>
+    
+    <!-- פרטי העסק כפי שביקשת -->
+    <div class="business-info">
+        <div class="info-line">📍 <strong>כתובתנו:</strong> רחוב שפת אמת 10, בני ברק</div>
+        <div class="info-line">⏰ <strong>שעות פתיחה לבירורים:</strong> 18:00 עד 22:00 בלילה</div>
+        <div class="info-line">📞 <strong>טלפון לבירורים והזמנות:</strong> 052-7174064</div>
+    </div>
     
     <div class="categories-nav">
         <button class="tab-btn active" onclick="showCategory('mens')">גברים</button>
@@ -207,9 +231,8 @@
                     <div class="product-price">299 ש"ח</div>
                 </div>
             </div>
-            <!-- שנה את מספר הטלפון 0500000000 למספר האמיתי שלך -->
-            <a href="https://wa.me/972500000000?text=שלום!%20אני%20מעוניין%20לרכוש%20את%20הדגם:%20נעל%20ספורט%20אלגנט%20גברים%20במחיר%20299%20שח" target="_blank" class="order-btn">
-                <span>להזמנה מהירה בווטסאפ</span>
+            <a href="tel:0527174064" class="order-btn">
+                <span>לחץ לחיוג ובירור על הדגם</span>
             </a>
         </div>
 
@@ -223,8 +246,8 @@
                     <div class="product-price">349 ש"ח</div>
                 </div>
             </div>
-            <a href="https://wa.me/972500000000?text=שלום!%20אני%20מעוניין%20לרכוש%20את%20הדגם:%20נעלי%20ריצה%20מקצועיות%20במחיר%20349%20שח" target="_blank" class="order-btn">
-                <span>להזמנה מהירה בווטסאפ</span>
+            <a href="tel:0527174064" class="order-btn">
+                <span>לחץ לחיוג ובירור על הדגם</span>
             </a>
         </div>
     </div>
@@ -241,8 +264,8 @@
                     <div class="product-price">249 ש"ח</div>
                 </div>
             </div>
-            <a href="https://wa.me/972500000000?text=שלום!%20אני%20מעוניין%20לרכוש%20את%20הדגם:%20נעל%20הליכה%20נוחה%20במחיר%20249%20שח" target="_blank" class="order-btn">
-                <span>להזמנה מהירה בווטסאפ</span>
+            <a href="tel:0527174064" class="order-btn">
+                <span>לחץ לחיוג ובירור על הדגם</span>
             </a>
         </div>
     </div>
@@ -259,8 +282,8 @@
                     <div class="product-price">180 ש"ח</div>
                 </div>
             </div>
-            <a href="https://wa.me/972500000000?text=שלום!%20אני%20מעוניין%20לרכוש%20את%20הדגם:%20נעל%20ספורט%20סקוץ%20לילדים%20במחיר%20180%20שח" target="_blank" class="order-btn">
-                <span>להזמנה מהירה בווטסאפ</span>
+            <a href="tel:0527174064" class="order-btn">
+                <span>לחץ לחיוג ובירור על הדגם</span>
             </a>
         </div>
     </div>
