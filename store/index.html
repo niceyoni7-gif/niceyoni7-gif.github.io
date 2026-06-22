@@ -56,7 +56,7 @@
             background-size: 36px 36px;
         }
 
-        /* הגדרות הטיקר המשופר */
+        /* הגדרות הטיקר המשופר למניעת הפסקות וחורים */
         .brands-ticker {
             background: #1f1430;
             padding: 10px 0;
@@ -80,7 +80,7 @@
         .brands-track {
             display: flex;
             width: max-content;
-            animation: ticker 35s linear infinite;
+            animation: ticker 40s linear infinite;
             will-change: transform;
         }
 
@@ -90,7 +90,7 @@
 
         @keyframes ticker {
             0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-25%); } /* תזוזה של רבע אורך מונעת קפיצות ורווחים */
         }
 
         .brand-item {
@@ -520,10 +520,10 @@
         document.body.classList.add('bg-' + categoryId);
     }
 
-    // שכפול רשימת המותגים לטובת יצירת רצף אינסופי באנימציה
+    // שכפול התוכן 4 פעמים למניעת חורים והפסקות במסכים רחבים
     const track = document.getElementById('brandsTrack');
     const original = track.innerHTML;
-    track.innerHTML = original + original;
+    track.innerHTML = original + original + original + original;
 
     buildGalleries();
     setRandomSlogan();
