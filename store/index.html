@@ -286,73 +286,13 @@
 <div class="container">
 
     <!-- גלריית גברים -->
-    <div id="mens" class="gallery-section active">
-        <div class="product-card">
-            <div>
-                <div class="image-container">
-                    <img src="nike-black.jpg" alt="נעל ספורט אלגנט גברים">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">נעל ספורט אלגנט גברים</div>
-                    <div class="product-price">299 ש"ח</div>
-                </div>
-            </div>
-            <a href="tel:0527174064" class="order-btn">
-                <span>לחץ לחיוג ובירור על הדגם</span>
-            </a>
-        </div>
-
-        <div class="product-card">
-            <div>
-                <div class="image-container">
-                    <img src="mens-run.jpg" alt="נעלי ריצה מקצועיות">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">נעלי ריצה מקצועיות</div>
-                    <div class="product-price">349 ש"ח</div>
-                </div>
-            </div>
-            <a href="tel:0527174064" class="order-btn">
-                <span>לחץ לחיוג ובירור על הדגם</span>
-            </a>
-        </div>
-    </div>
+    <div id="mens" class="gallery-section active"></div>
 
     <!-- גלריית נשים -->
-    <div id="womens" class="gallery-section">
-        <div class="product-card">
-            <div>
-                <div class="image-container">
-                    <img src="womens-comfort.jpg" alt="נעל הליכה נוחה">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">נעל הליכה נוחה לנו</div>
-                    <div class="product-price">249 ש"ח</div>
-                </div>
-            </div>
-            <a href="tel:0527174064" class="order-btn">
-                <span>לחץ לחיוג ובירור על הדגם</span>
-            </a>
-        </div>
-    </div>
+    <div id="womens" class="gallery-section"></div>
 
     <!-- גלריית ילדים -->
-    <div id="kids" class="gallery-section">
-        <div class="product-card">
-            <div>
-                <div class="image-container">
-                    <img src="kids-sport.jpg" alt="נעל ספורט סקוץ'">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">נעל ספורט סקוץ' לילדים</div>
-                    <div class="product-price">180 ש"ח</div>
-                </div>
-            </div>
-            <a href="tel:0527174064" class="order-btn">
-                <span>לחץ לחיוג ובירור על הדגם</span>
-            </a>
-        </div>
-    </div>
+    <div id="kids" class="gallery-section"></div>
 
 </div>
 
@@ -361,6 +301,86 @@
 </footer>
 
 <script>
+    // ===== הגדרת תמונות המוצרים =====
+    // שם הקובץ קובע הכל: <מספר דגם>-<מחיר בש"ח>.jpg
+    // מספר הדגם קובע את הקטגוריה:
+    //   101–199 → גברים | 201–299 → נשים | 301–399 → ילדים
+    // לדוגמה: "101-350.jpg" = נעל גברים, דגם 101, מחיר 350 ש"ח
+    // כדי להוסיף מוצר חדש - פשוט הוסף את שם הקובץ לרשימה למטה.
+    const PRODUCT_IMAGES = [
+        "101-350.jpg",
+        "102-299.jpg",
+        "201-249.jpg",
+        "301-180.jpg"
+    ];
+
+    const FOLDER = "images/"; // התיקייה בה נמצאות תמונות המוצרים
+
+    const CATEGORY_LABELS = {
+        mens: "נעל גברים",
+        womens: "נעל נשים",
+        kids: "נעל ילדים"
+    };
+
+    function getCategoryFromModelNumber(modelNumber) {
+        if (modelNumber >= 101 && modelNumber <= 199) return "mens";
+        if (modelNumber >= 201 && modelNumber <= 299) return "womens";
+        if (modelNumber >= 301 && modelNumber <= 399) return "kids";
+        return null;
+    }
+
+    function buildGalleries() {
+        const galleries = { mens: [], womens: [], kids: [] };
+
+        PRODUCT_IMAGES.forEach(filename => {
+            const match = filename.match(/^(\d+)-(\d+)\.(jpg|jpeg|png|webp)$/i);
+            if (!match) {
+                console.warn("שם קובץ לא תקני, מדלג:", filename);
+                return;
+            }
+
+            const modelNumber = parseInt(match[1], 10);
+            const price = parseInt(match[2], 10);
+            const category = getCategoryFromModelNumber(modelNumber);
+
+            if (!category) {
+                console.warn("מספר דגם מחוץ לטווח הקטגוריות, מדלג:", filename);
+                return;
+            }
+
+            galleries[category].push({
+                src: FOLDER + filename,
+                title: CATEGORY_LABELS[category] + " — דגם " + modelNumber,
+                price: price
+            });
+        });
+
+        Object.keys(galleries).forEach(category => {
+            const container = document.getElementById(category);
+            container.innerHTML = "";
+
+            galleries[category].forEach(product => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                    <div>
+                        <div class="image-container">
+                            <img src="${product.src}" alt="${product.title}">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">${product.title}</div>
+                            <div class="product-price">${product.price} ש"ח</div>
+                        </div>
+                    </div>
+                    <a href="tel:0527174064" class="order-btn">
+                        <span>לחץ לחיוג ובירור על הדגם</span>
+                    </a>
+                `;
+                container.appendChild(card);
+            });
+        });
+    }
+
     function showCategory(categoryId) {
         document.querySelectorAll('.gallery-section').forEach(section => {
             section.classList.remove('active');
@@ -376,6 +396,7 @@
         document.body.classList.add('bg-' + categoryId);
     }
 
+    buildGalleries();
     document.body.classList.add('bg-mens');
 </script>
 
