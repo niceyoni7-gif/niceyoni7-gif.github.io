@@ -56,6 +56,63 @@
             background-size: 36px 36px;
         }
 
+        /* הגדרות הטיקר המשופר */
+        .brands-ticker {
+            background: #1f1430;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .brands-ticker::before,
+        .brands-ticker::after {
+            content: "";
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 60px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .brands-ticker::before { left: 0; background: linear-gradient(to right, #1f1430, transparent); }
+        .brands-ticker::after  { right: 0; background: linear-gradient(to left, #1f1430, transparent); }
+
+        .brands-track {
+            display: flex;
+            width: max-content;
+            animation: ticker 35s linear infinite;
+            will-change: transform;
+        }
+
+        .brands-ticker:hover .brands-track { 
+            animation-play-state: paused; 
+        }
+
+        @keyframes ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .brand-item {
+            display: inline-block;
+            flex-shrink: 0;
+            padding: 0 32px;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffd60a;
+            font-style: italic;
+            white-space: nowrap;
+        }
+
+        .brand-item sup {
+            font-size: 8px;
+            font-style: normal;
+            vertical-align: super;
+            opacity: 0.7;
+        }
+
         header {
             background: linear-gradient(135deg, var(--leather) 0%, var(--sole) 100%);
             padding: 46px 20px 34px;
@@ -287,6 +344,41 @@
 </head>
 <body>
 
+<div class="brands-ticker" aria-label="מותגי נעליים">
+    <div class="brands-track" id="brandsTrack">
+        <span class="brand-item">Nike<sup>®</sup></span>
+        <span class="brand-item">Adidas<sup>®</sup></span>
+        <span class="brand-item">Puma<sup>®</sup></span>
+        <span class="brand-item">New Balance<sup>®</sup></span>
+        <span class="brand-item">Hoka<sup>™</sup></span>
+        <span class="brand-item">Reebok<sup>®</sup></span>
+        <span class="brand-item">Skechers<sup>®</sup></span>
+        <span class="brand-item">Vans<sup>®</sup></span>
+        <span class="brand-item">Converse<sup>®</sup></span>
+        <span class="brand-item">Asics<sup>®</sup></span>
+        <span class="brand-item">Under Armour<sup>®</sup></span>
+        <span class="brand-item">Timberland<sup>®</sup></span>
+        <span class="brand-item">Salomon<sup>®</sup></span>
+        <span class="brand-item">Brooks<sup>®</sup></span>
+        <span class="brand-item">On Running<sup>™</sup></span>
+        <span class="brand-item">Merrell<sup>®</sup></span>
+        <span class="brand-item">Mizuno<sup>®</sup></span>
+        <span class="brand-item">DC Shoes<sup>®</sup></span>
+        <span class="brand-item">Fila<sup>®</sup></span>
+        <span class="brand-item">Diadora<sup>®</sup></span>
+        <span class="brand-item">Kappa<sup>®</sup></span>
+        <span class="brand-item">Columbia<sup>®</sup></span>
+        <span class="brand-item">Keen<sup>®</sup></span>
+        <span class="brand-item">Veja<sup>™</sup></span>
+        <span class="brand-item">Lacoste<sup>®</sup></span>
+        <span class="brand-item">Lotto<sup>®</sup></span>
+        <span class="brand-item">Ecco<sup>®</sup></span>
+        <span class="brand-item">Crocs<sup>®</sup></span>
+        <span class="brand-item">Geox<sup>®</sup></span>
+        <span class="brand-item">Clarks<sup>®</sup></span>
+    </div>
+</div>
+
 <header>
     <div class="eyebrow">בני ברק · נעליים לכל המשפחה</div>
     <h1>עולם הנעל</h1>
@@ -427,6 +519,11 @@
         document.body.classList.remove('bg-mens', 'bg-womens', 'bg-kids');
         document.body.classList.add('bg-' + categoryId);
     }
+
+    // שכפול רשימת המותגים לטובת יצירת רצף אינסופי באנימציה
+    const track = document.getElementById('brandsTrack');
+    const original = track.innerHTML;
+    track.innerHTML = original + original;
 
     buildGalleries();
     setRandomSlogan();
