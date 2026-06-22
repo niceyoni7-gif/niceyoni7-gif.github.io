@@ -35,21 +35,30 @@
         }
 
         body.bg-mens {
-            background-color: #bcd6ff;
-            background-image: radial-gradient(circle at 10% 10%, rgba(37,99,235,0.55) 0, transparent 55%),
-                               radial-gradient(circle at 90% 90%, rgba(29,78,216,0.45) 0, transparent 55%);
+            background-color: #eaf2ff;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #2563eb 0px, #2563eb 18px,
+                #ffffff 18px, #ffffff 36px
+            );
         }
 
         body.bg-womens {
-            background-color: #ffc2cf;
-            background-image: radial-gradient(circle at 10% 10%, rgba(225,29,72,0.55) 0, transparent 55%),
-                               radial-gradient(circle at 90% 90%, rgba(190,18,60,0.45) 0, transparent 55%);
+            background-color: #ffeef0;
+            background-image: repeating-linear-gradient(
+                -45deg,
+                #e11d48 0px, #e11d48 18px,
+                #ffffff 18px, #ffffff 36px
+            );
         }
 
         body.bg-kids {
-            background-color: #d6c2ff;
-            background-image: radial-gradient(circle at 10% 10%, rgba(147,51,234,0.5) 0, transparent 55%),
-                               radial-gradient(circle at 90% 90%, rgba(20,184,166,0.45) 0, transparent 55%);
+            background-color: #f1ecff;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #e11d48 0px, #e11d48 18px,
+                #2563eb 18px, #2563eb 36px
+            );
         }
 
         header {
@@ -147,6 +156,13 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 48px 20px 70px;
+        }
+
+        .container-inner {
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 36px 28px;
         }
 
         /* גריד גלריה */
@@ -250,15 +266,24 @@
         footer {
             text-align: center;
             padding: 26px 20px 34px;
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 13px;
             color: var(--ink-soft);
-            text-transform: uppercase;
         }
 
         footer strong {
             color: var(--leather-dark);
-            letter-spacing: 1.5px;
+            letter-spacing: 0.5px;
+        }
+
+        footer a {
+            color: var(--leather-dark);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dotted var(--leather-dark);
+        }
+
+        footer a:hover {
+            color: var(--sole-dark);
         }
     </style>
 </head>
@@ -284,20 +309,23 @@
 </header>
 
 <div class="container">
+    <div class="container-inner">
 
-    <!-- גלריית גברים -->
-    <div id="mens" class="gallery-section active"></div>
+        <!-- גלריית גברים -->
+        <div id="mens" class="gallery-section active"></div>
 
-    <!-- גלריית נשים -->
-    <div id="womens" class="gallery-section"></div>
+        <!-- גלריית נשים -->
+        <div id="womens" class="gallery-section"></div>
 
-    <!-- גלריית ילדים -->
-    <div id="kids" class="gallery-section"></div>
+        <!-- גלריית ילדים -->
+        <div id="kids" class="gallery-section"></div>
 
+    </div>
 </div>
 
 <footer>
-    האתר נבנה על ידי <strong>niceyoni.com</strong>
+    <strong>בניית אתרים</strong> במחיר שבאמת יפתיע אותך —
+    <a href="mailto:niceyoni7@gmail.com">niceyoni7@gmail.com</a>
 </footer>
 
 <script>
