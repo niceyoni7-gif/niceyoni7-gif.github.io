@@ -301,23 +301,30 @@
 </footer>
 
 <script>
-    // ===== הגדרת תמונות המוצרים =====
-    // שם הקובץ קובע הכל: <מספר דגם>-<מחיר בש"ח>.jpg (או .png)
-    // נתמכים: jpg, jpeg, png, webp — לפי אותם כללים בדיוק
-    // מספר הדגם קובע את הקטגוריה:
+    // ===== מקור התמונות =====
+    // האתר רץ ב-GitHub Pages, אז אפשר לשאול את GitHub עצמו "אילו קבצים יש בתיקייה הזו"
+    // בלי לעדכן רשימה בקוד בכל פעם שמעלים תמונה.
+    //
+    // איך לקבוע קטגוריה ומחיר: שם הקובץ <מספר דגם>-<מחיר בש"ח>.jpg/.png/.jpeg/.webp
     //   101–199 → גברים | 201–299 → נשים | 301–399 → ילדים
     // לדוגמה: "101-350.jpg" = נעל גברים, דגם 101, מחיר 350 ש"ח
-    //          "201-249.png" = נעל נשים, דגם 201, מחיר 249 ש"ח
-    // כדי להוסיף מוצר חדש - פשוט הוסף את שם הקובץ לרשימה למטה.
-    const PRODUCT_IMAGES = [
-        "101-350.jpg",
-        "102-299.png",
-        "201-249.jpg",
-        "202-279.png",
-        "301-180.jpg"
-    ];
+    //
+    // אם מסיבה כלשהי GitHub לא מגיב (לדוגמה: הגבלת קצב, או פתיחה מקומית של הקובץ
+    // בלי אינטרנט לריפו), המערכת חוזרת לרשימה הקבועה שב-FALLBACK_IMAGES.
 
-    const FOLDER = "images/"; // התיקייה בה נמצאות תמונות המוצרים
+    const GITHUB_OWNER = "niceyoni7-gif";
+    const GITHUB_REPO = "niceyoni7-gif.github.io";
+    const GITHUB_FOLDER = "store"; // התיקייה בריפו שבה נמצא index.html והתמונות
+    const GITHUB_BRANCH = "main";
+
+    // רשימת גיבוי - תיעדכן אוטומטית רק אם הקריאה ל-GitHub נכשלת
+    const FALLBACK_IMAGES = [
+        "101-330.png",
+        "201-210.png",
+        "302-300.png",
+        "303-399.png",
+        "304-499.png"
+    ];
 
     const CATEGORY_LABELS = {
         mens: "נעל גברים",
@@ -332,10 +339,22 @@
         return null;
     }
 
-    function buildGalleries() {
+    async function fetchImageListFromGitHub() {
+        const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}?ref=${GITHUB_BRANCH}`;
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error("GitHub API request failed: " + response.status);
+        }
+        const files = await response.json();
+        return files
+            .filter(file => file.type === "file" && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
+            .map(file => file.name);
+    }
+
+    function renderGalleries(imageFilenames) {
         const galleries = { mens: [], womens: [], kids: [] };
 
-        PRODUCT_IMAGES.forEach(filename => {
+        imageFilenames.forEach(filename => {
             const match = filename.match(/^(\d+)-(\d+)\.(jpg|jpeg|png|webp)$/i);
             if (!match) {
                 console.warn("שם קובץ לא תקני, מדלג:", filename);
@@ -352,7 +371,7 @@
             }
 
             galleries[category].push({
-                src: FOLDER + filename,
+                src: filename,
                 title: CATEGORY_LABELS[category] + " — דגם " + modelNumber,
                 price: price
             });
@@ -361,6 +380,11 @@
         Object.keys(galleries).forEach(category => {
             const container = document.getElementById(category);
             container.innerHTML = "";
+
+            if (galleries[category].length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--ink-soft);">אין כרגע דגמים בקטגוריה הזו.</p>';
+                return;
+            }
 
             galleries[category].forEach(product => {
                 const card = document.createElement("div");
@@ -384,6 +408,16 @@
         });
     }
 
+    async function buildGalleries() {
+        try {
+            const imageFilenames = await fetchImageListFromGitHub();
+            renderGalleries(imageFilenames);
+        } catch (err) {
+            console.warn("לא ניתן לטעון רשימת תמונות מ-GitHub, משתמש ברשימת הגיבוי:", err);
+            renderGalleries(FALLBACK_IMAGES);
+        }
+    }
+
     function showCategory(categoryId) {
         document.querySelectorAll('.gallery-section').forEach(section => {
             section.classList.remove('active');
@@ -402,6 +436,7 @@
     buildGalleries();
     document.body.classList.add('bg-mens');
 </script>
+
 
 </body>
 </html>
