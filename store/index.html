@@ -17,7 +17,6 @@
             --ink: #1f1430;
             --ink-soft: #6a5d8a;
             --rule: #e3d9ff;
-            --stitch: #ffd60a;
         }
 
         * { box-sizing: border-box; }
@@ -29,34 +28,44 @@
             background-color: var(--bg);
             color: var(--ink);
             line-height: 1.6;
-            transition: background 0.5s ease;
+            transition: background-color 0.4s ease;
         }
 
-        /* ריבועי שחמט - גברים: כחול בהיר ולבן */
+        /* --- רקע שחמט תואם לכל דפדפן --- */
         body.bg-mens {
             background-color: #ffffff;
             background-image:
-                repeating-conic-gradient(#93c5fd 0% 25%, #ffffff 0% 50%); /* שונה לכחול פסטל בהיר */
+                linear-gradient(45deg, #bfdbfe 25%, transparent 25%),
+                linear-gradient(-45deg, #bfdbfe 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #bfdbfe 75%),
+                linear-gradient(-45deg, transparent 75%, #bfdbfe 75%);
             background-size: 36px 36px;
+            background-position: 0 0, 0 18px, 18px -18px, -18px 0px;
         }
-        
-        /* ריבועי שחמט - נשים: אדום/ורוד בהיר ולבן */
+
         body.bg-womens {
             background-color: #ffffff;
             background-image:
-                repeating-conic-gradient(#fca5a5 0% 25%, #ffffff 0% 50%); /* שונה לאדום/ורוד בהיר מאוד */
+                linear-gradient(45deg, #fecdd3 25%, transparent 25%),
+                linear-gradient(-45deg, #fecdd3 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #fecdd3 75%),
+                linear-gradient(-45deg, transparent 75%, #fecdd3 75%);
             background-size: 36px 36px;
-        }
-        
-        /* ריבועי שחמט - ילדים: אדום בהיר וכחול בהיר */
-        body.bg-kids {
-            background-color: #93c5fd; /* רקע כחול בהיר */
-            background-image:
-                repeating-conic-gradient(#fca5a5 0% 25%, #93c5fd 0% 50%); /* שילוב של אדום בהיר וכחול בהיר */
-            background-size: 36px 36px;
+            background-position: 0 0, 0 18px, 18px -18px, -18px 0px;
         }
 
-        /* הגדרות הטיקר המשופר - עבודה במצב LTR למניעת באגים של כיווניות בדפדפנים */
+        body.bg-kids {
+            background-color: #bfdbfe;
+            background-image:
+                linear-gradient(45deg, #fecdd3 25%, transparent 25%),
+                linear-gradient(-45deg, #fecdd3 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #fecdd3 75%),
+                linear-gradient(-45deg, transparent 75%, #fecdd3 75%);
+            background-size: 36px 36px;
+            background-position: 0 0, 0 18px, 18px -18px, -18px 0px;
+        }
+
+        /* --- טיקר מותגים --- */
         .brands-ticker {
             background: #1f1430;
             padding: 15px 0;
@@ -86,8 +95,8 @@
             will-change: transform;
         }
 
-        .brands-ticker:hover .brands-track { 
-            animation-play-state: paused; 
+        .brands-ticker:hover .brands-track {
+            animation-play-state: paused;
         }
 
         @keyframes ticker {
@@ -114,6 +123,7 @@
             opacity: 0.7;
         }
 
+        /* --- כותרת --- */
         header {
             background: linear-gradient(135deg, var(--leather) 0%, var(--sole) 100%);
             padding: 46px 20px 34px;
@@ -122,8 +132,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* הקו הכתום הקטוע (header::after) הוסר מכאן לחלוטין */
 
         .eyebrow {
             font-size: 13px;
@@ -150,19 +158,18 @@
         }
 
         .business-info {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,0.12);
             display: inline-block;
             padding: 16px 26px;
             border-radius: 12px;
             font-size: 14.5px;
             margin-bottom: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255,255,255,0.22);
             backdrop-filter: blur(6px);
             text-align: right;
         }
-        .info-line {
-            margin: 5px 0;
-        }
+
+        .info-line { margin: 5px 0; }
 
         .categories-nav {
             display: flex;
@@ -173,8 +180,8 @@
         }
 
         .tab-btn {
-            background-color: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            background-color: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.35);
             padding: 12px 32px;
             font-size: 16px;
             font-weight: 700;
@@ -185,7 +192,7 @@
         }
 
         .tab-btn:hover {
-            background-color: rgba(255, 255, 255, 0.26);
+            background-color: rgba(255,255,255,0.26);
             transform: translateY(-1px);
         }
 
@@ -196,6 +203,7 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.22);
         }
 
+        /* --- גריד מוצרים --- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -203,7 +211,7 @@
         }
 
         .container-inner {
-            background: rgba(255, 255, 255, 0.78);
+            background: rgba(255,255,255,0.78);
             backdrop-filter: blur(4px);
             border-radius: 24px;
             padding: 36px 28px;
@@ -223,7 +231,7 @@
             background: var(--card-bg);
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 10px 28px rgba(123, 47, 247, 0.10);
+            box-shadow: 0 10px 28px rgba(123,47,247,0.10);
             border: 1px solid var(--rule);
             text-align: center;
             padding: 22px;
@@ -235,7 +243,7 @@
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 16px 34px rgba(123, 47, 247, 0.18);
+            box-shadow: 0 16px 34px rgba(123,47,247,0.18);
             border-color: var(--sole);
         }
 
@@ -256,13 +264,7 @@
             transition: transform 0.5s ease;
         }
 
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 6px 0;
-        }
+        .product-card:hover img { transform: scale(1.05); }
 
         .product-title {
             font-size: 19px;
@@ -295,7 +297,7 @@
             font-weight: bold;
             font-size: 15px;
             transition: background-color 0.2s, transform 0.2s;
-            box-shadow: 0 5px 14px rgba(255, 77, 109, 0.38);
+            box-shadow: 0 5px 14px rgba(255,77,109,0.38);
         }
 
         .order-btn:hover {
@@ -303,27 +305,20 @@
             transform: translateY(-2px);
         }
 
+        /* --- הודעת טעינה / שגיאה --- */
+        .loading-msg {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: var(--ink-soft);
+            padding: 40px 0;
+            font-size: 16px;
+        }
+
         footer {
             text-align: center;
             padding: 26px 20px 34px;
             font-size: 13px;
             color: var(--ink-soft);
-        }
-
-        footer strong {
-            color: var(--leather-dark);
-            letter-spacing: 0.5px;
-        }
-
-        footer a {
-            color: var(--leather-dark);
-            text-decoration: none;
-            font-weight: 700;
-            border-bottom: 1px dotted var(--leather-dark);
-        }
-
-        footer a:hover {
-            color: var(--sole-dark);
         }
 
         .footer-slogan {
@@ -334,6 +329,15 @@
             margin-bottom: 8px;
             font-weight: 600;
         }
+
+        footer a {
+            color: var(--leather-dark);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dotted var(--leather-dark);
+        }
+
+        footer a:hover { color: var(--sole-dark); }
     </style>
 </head>
 <body>
@@ -385,9 +389,9 @@
     </div>
 
     <div class="categories-nav">
-        <button class="tab-btn active" onclick="showCategory('mens', event)">גברים</button>
-        <button class="tab-btn" onclick="showCategory('womens', event)">נשים</button>
-        <button class="tab-btn" onclick="showCategory('kids', event)">ילדים</button>
+        <button class="tab-btn active" onclick="showCategory('mens', this)">גברים</button>
+        <button class="tab-btn" onclick="showCategory('womens', this)">נשים</button>
+        <button class="tab-btn" onclick="showCategory('kids', this)">ילדים</button>
     </div>
 </header>
 
@@ -404,10 +408,13 @@
 </footer>
 
 <script>
-    const GITHUB_OWNER = "niceyoni7-gif";
-    const GITHUB_REPO = "niceyoni7-gif.github.io";
+    const GITHUB_OWNER  = "niceyoni7-gif";
+    const GITHUB_REPO   = "niceyoni7-gif.github.io";
     const GITHUB_FOLDER = "store";
     const GITHUB_BRANCH = "main";
+
+    // URL בסיס לתמונות גולמיות
+    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${GITHUB_FOLDER}`;
 
     const FALLBACK_IMAGES = [
         "101-330.png",
@@ -418,9 +425,9 @@
     ];
 
     const CATEGORY_LABELS = {
-        mens: "נעל גברים",
+        mens:   "נעל גברים",
         womens: "נעל נשים",
-        kids: "נעל ילדים"
+        kids:   "נעל ילדים"
     };
 
     const FOOTER_SLOGANS = [
@@ -431,26 +438,27 @@
     ];
 
     function setRandomSlogan() {
-        const el = document.getElementById('footer-slogan');
+        const el  = document.getElementById('footer-slogan');
         const idx = Math.floor(Math.random() * FOOTER_SLOGANS.length);
-        el.innerHTML = FOOTER_SLOGANS[idx] + ' — <a href="mailto:niceyoni7@gmail.com">niceyoni7@gmail.com</a>';
+        el.innerHTML = FOOTER_SLOGANS[idx] +
+            ' — <a href="mailto:niceyoni7@gmail.com">niceyoni7@gmail.com</a>';
     }
 
-    function getCategoryFromModelNumber(modelNumber) {
-        if (modelNumber >= 101 && modelNumber <= 199) return "mens";
-        if (modelNumber >= 201 && modelNumber <= 299) return "womens";
-        if (modelNumber >= 301 && modelNumber <= 399) return "kids";
+    function getCategoryFromModelNumber(n) {
+        if (n >= 101 && n <= 199) return "mens";
+        if (n >= 201 && n <= 299) return "womens";
+        if (n >= 301 && n <= 399) return "kids";
         return null;
     }
 
     async function fetchImageListFromGitHub() {
         const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}?ref=${GITHUB_BRANCH}`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("GitHub API request failed: " + response.status);
-        const files = await response.json();
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("GitHub API שגיאה: " + res.status);
+        const files = await res.json();
         return files
-            .filter(file => file.type === "file" && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-            .map(file => file.name);
+            .filter(f => f.type === "file" && /\.(jpg|jpeg|png|webp)$/i.test(f.name))
+            .map(f => f.name);
     }
 
     function renderGalleries(imageFilenames) {
@@ -458,28 +466,40 @@
 
         imageFilenames.forEach(filename => {
             const match = filename.match(/^(\d+)-(\d+)\.(jpg|jpeg|png|webp)$/i);
-            if (!match) { console.warn("שם קובץ לא תקני, מדלג:", filename); return; }
+            if (!match) return;
             const modelNumber = parseInt(match[1], 10);
-            const price = parseInt(match[2], 10);
-            const category = getCategoryFromModelNumber(modelNumber);
-            if (!category) { console.warn("מספר דגם מחוץ לטווח הקטגוריות, מדלג:", filename); return; }
-            galleries[category].push({ src: filename, title: CATEGORY_LABELS[category] + " — דגם " + modelNumber, price });
+            const price       = parseInt(match[2], 10);
+            const category    = getCategoryFromModelNumber(modelNumber);
+            if (!category) return;
+            galleries[category].push({
+                src:   `${RAW_BASE}/${filename}`,   // ← URL מלא לתמונה
+                title: CATEGORY_LABELS[category] + " — דגם " + modelNumber,
+                price
+            });
         });
 
         Object.keys(galleries).forEach(category => {
             const container = document.getElementById(category);
             container.innerHTML = "";
+
             if (galleries[category].length === 0) {
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--ink-soft);">אין כרגע דגמים בקטגוריה הזו.</p>';
+                container.innerHTML =
+                    '<p class="loading-msg">אין כרגע דגמים בקטגוריה הזו.</p>';
                 return;
             }
+
             galleries[category].forEach(product => {
                 const card = document.createElement("div");
                 card.className = "product-card";
                 card.innerHTML = `
                     <div>
                         <div class="image-container">
-                            <img src="${product.src}" alt="${product.title}">
+                            <img
+                                src="${product.src}"
+                                alt="${product.title}"
+                                loading="lazy"
+                                onerror="this.style.opacity='0.3'"
+                            >
                         </div>
                         <div class="product-info">
                             <div class="product-title">${product.title}</div>
@@ -496,33 +516,37 @@
     }
 
     async function buildGalleries() {
+        // הצג הודעת טעינה בכל קטגוריה
+        ['mens','womens','kids'].forEach(cat => {
+            document.getElementById(cat).innerHTML =
+                '<p class="loading-msg">⏳ טוען תמונות…</p>';
+        });
+
         try {
             const imageFilenames = await fetchImageListFromGitHub();
             renderGalleries(imageFilenames);
         } catch (err) {
-            console.warn("לא ניתן לטעון רשימת תמונות מ-GitHub, משתמש ברשימת הגיבוי:", err);
+            console.warn("שגיאה בטעינה מ-GitHub, משתמש בגיבוי:", err);
             renderGalleries(FALLBACK_IMAGES);
         }
     }
 
-    function showCategory(categoryId, event) {
+    function showCategory(categoryId, btn) {
         document.querySelectorAll('.gallery-section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(categoryId).classList.add('active');
-        if (event && event.currentTarget) event.currentTarget.classList.add('active');
+        if (btn) btn.classList.add('active');
         document.body.classList.remove('bg-mens', 'bg-womens', 'bg-kids');
         document.body.classList.add('bg-' + categoryId);
     }
 
-    // הפעלת השכפול בצורה בטוחה רק לאחר טעינת תוכן ה-HTML המלא כדי למנוע באגים בריענון
+    // שכפול טיקר לאנימציה רציפה
     window.addEventListener('DOMContentLoaded', () => {
         const track = document.getElementById('brandsTrack');
-        if (track) {
-            const original = track.innerHTML;
-            track.innerHTML = original + original;
-        }
+        if (track) track.innerHTML += track.innerHTML;
     });
 
+    // הפעלה
     buildGalleries();
     setRandomSlogan();
     document.body.classList.add('bg-mens');
