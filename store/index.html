@@ -338,6 +338,84 @@
         }
 
         footer a:hover { color: var(--sole-dark); }
+
+        /* --- מודאל תמונה מוגדלת --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,5,25,0.88);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+        }
+        .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 22px;
+            max-width: 700px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            animation: slideUp 0.25s ease;
+            position: relative;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity:0; }
+            to   { transform: translateY(0);    opacity:1; }
+        }
+        .modal-img-wrap {
+            width: 100%;
+            background: #f0ecff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 500px;
+            overflow: hidden;
+        }
+        .modal-img-wrap img {
+            width: 100%;
+            object-fit: contain;
+            max-height: 500px;
+        }
+        .modal-footer {
+            padding: 18px 24px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .modal-title { font-size: 18px; font-weight: 700; color: var(--leather-dark); }
+        .modal-price {
+            font-size: 15px; font-weight: 800;
+            background: var(--pop); padding: 5px 16px;
+            border-radius: 20px; color: var(--ink);
+        }
+        .modal-call {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--sole); color: #fff; text-decoration: none;
+            padding: 11px 22px; border-radius: 12px;
+            font-weight: 700; font-size: 15px;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(255,77,109,0.35);
+        }
+        .modal-call:hover { background: var(--sole-dark); transform: translateY(-2px); }
+        .modal-close {
+            position: absolute; top: 14px; left: 14px;
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(0,0,0,0.45); border: none; color: #fff;
+            font-size: 20px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(0,0,0,0.7); }
+        .image-container { cursor: zoom-in; }
+        body.modal-open { overflow: hidden; }
     </style>
 </head>
 <body>
@@ -493,7 +571,7 @@
                 card.className = "product-card";
                 card.innerHTML = `
                     <div>
-                        <div class="image-container">
+                        <div class="image-container" onclick="openModal('${product.src}', '${product.title}', ${product.price})">
                             <img
                                 src="${product.src}"
                                 alt="${product.title}"
@@ -503,7 +581,7 @@
                         </div>
                         <div class="product-info">
                             <div class="product-title">${product.title}</div>
-                            <div class="product-price">${product.price} ש"ח</div>
+                            ${product.price > 0 ? `<div class="product-price">${product.price} ש"ח</div>` : ''}
                         </div>
                     </div>
                     <a href="tel:0527174064" class="order-btn">
@@ -550,7 +628,46 @@
     buildGalleries();
     setRandomSlogan();
     document.body.classList.add('bg-mens');
+
+    // --- מודאל ---
+    function openModal(src, title, price) {
+        document.getElementById('modalImg').src = src;
+        document.getElementById('modalTitle').textContent = title;
+        const priceEl = document.getElementById('modalPrice');
+        priceEl.innerHTML = price > 0 ? `<div class="modal-price">${price} ש"ח</div>` : '';
+        document.getElementById('imgModal').classList.add('open');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeModalBtn() {
+        document.getElementById('imgModal').classList.remove('open');
+        document.body.classList.remove('modal-open');
+    }
+
+    function closeModal(e) {
+        if (e.target === document.getElementById('imgModal')) closeModalBtn();
+    }
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModalBtn();
+    });
 </script>
+
+
+<!-- מודאל תמונה מוגדלת -->
+<div class="modal-overlay" id="imgModal" onclick="closeModal(event)">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModalBtn()">&#x2715;</button>
+        <div class="modal-img-wrap">
+            <img id="modalImg" src="" alt="">
+        </div>
+        <div class="modal-footer">
+            <div class="modal-title" id="modalTitle"></div>
+            <div id="modalPrice"></div>
+            <a href="tel:0527174064" class="modal-call">📞 לחיוג ובירור</a>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
